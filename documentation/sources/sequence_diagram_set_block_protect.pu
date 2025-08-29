@@ -1,0 +1,18 @@
+@startuml seq_diagram_set_block_protected
+
+actor "Caller" as C
+participant "MR25H40" as MR
+participant "CsGuard" as CS
+participant "Spi" as SPI
+
+C -> MR : set_block_protect(Protect p, bool hw_lock)
+MR -> MR : build new status byte (SR_BP bits, SR_SRWD if hw_lock)
+MR -> MR : write_status(sr)
+
+alt hw_lock == true
+    note over MR : Status Register Write Disable bit set → аппаратная блокировка
+end
+
+MR --> C : block protection configured
+
+@enduml

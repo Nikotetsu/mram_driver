@@ -1,0 +1,19 @@
+@startuml seq_diagram_erase_all
+
+actor "Caller" as C
+participant "MR25H40" as MR
+participant "CsGuard" as CS
+participant "Spi" as SPI
+
+C -> MR : erase_all()
+MR -> SPI : cs_assert() (via CsGuard)
+MR -> SPI : transfer(WRITE_ENABLE)
+MR -> SPI : cs_deassert() (CsGuard destructor)
+
+MR -> SPI : cs_assert() (via CsGuard)
+MR -> SPI : transfer(ERASE_ALL_CMD)
+MR -> SPI : cs_deassert() (CsGuard destructor)
+
+MR --> C : done
+
+@enduml

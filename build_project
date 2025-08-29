@@ -1,0 +1,17 @@
+#!/bin/bash
+
+if [ ! -e build ]
+then
+	echo "Project has been not built yet. Start to build..."
+	mkdir build
+fi
+
+cd build
+cmake ..
+make
+cd ..
+
+if [ -e clear_build ]
+then
+	chmod +x ./clear_build
+fi

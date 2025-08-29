@@ -1,0 +1,19 @@
+@startuml seq_diagram_add_record
+
+actor "Caller" as C
+participant "BureauStore" as BS
+participant "BureauCodec" as BC
+participant "MR25H40" as MR
+participant "Spi" as SPI
+
+C -> BS : write(bureau)
+BS -> BC : encode(bureau) -> bytes
+BS -> MR : write_page(slotA, header+payload)
+MR -> SPI : transfer(...)
+MR --> MR : update header/seqno
+alt conflict resolution
+    BS -> MR : write_page(slotB,...)
+end
+BS --> C : success/failure
+
+@enduml

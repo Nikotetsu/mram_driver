@@ -1,0 +1,25 @@
+@startuml component_diagram
+
+package "maram_driver" {
+  component "include (headers)" as H
+  component "src (implementation)" as S
+  component "tests" as T
+}
+
+H --> S : used during build
+T --> H : includes
+T --> S : links against
+
+component "MR25H40 (mram_mr25h40.cpp/h)" as MR
+component "BureauStore (bureau_store.cpp/h)" as BS
+component "BureauCodec (bureau_codec.cpp/h)" as BC
+component "Spi Mocks (tests/*)" as SM
+
+H -> MR
+H -> BS
+H -> BC
+T -> SM
+T -> BS
+T -> MR
+
+@enduml

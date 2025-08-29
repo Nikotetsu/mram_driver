@@ -1,0 +1,15 @@
+@startuml seq_diagram_block_read
+
+actor "Caller" as C
+participant "MR25H40" as MR
+participant "CsGuard" as CS
+participant "Spi" as SPI
+
+C -> MR : read(addr, out)
+MR -> SPI : cs_assert()   (via CsGuard)
+MR -> SPI : transfer(cmd + addr, rx)
+SPI --> MR : rx (data)
+MR -> SPI : cs_deassert() (CsGuard destructor)
+MR --> C : out filled
+
+@enduml

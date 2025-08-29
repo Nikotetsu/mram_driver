@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ -e build ]
+then
+	sudo rm -r build
+else
+	echo "No building found"
+fi
