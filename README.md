@@ -24,7 +24,23 @@ sudo chmod +x ./build_project
 ./build_project
 ```
 
-Для запуска выполнить исполняемый файл **mram_driver**
+Для запуска необъодимо:
+- Сделать исполняемым файл **mram_driver** в директории **build**
+```sh
+sudo chmod +x ./mram_driver
+```
+- Выполнить файл
 ```sh
 ./mram_driver
+```
+## Тестирование
+
+Для запуска тестов необходимо:
+- Сделать исполняемым файл **mram_driver_test** в директории **build**
+```sh
+sudo chmod +x ./mram_driver_test
+```
+- Выполнить файл
+```sh
+./mram_driver_test
 ```
